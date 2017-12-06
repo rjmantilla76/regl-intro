@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import * as d3 from "d3";
-import {mat2,vec2} from 'gl-matrix';
 export default class Example1 extends Component {
   constructor(props){
     super(props);
@@ -56,12 +55,11 @@ export default class Example1 extends Component {
         uniforms: {
           transform: ({ viewportWidth: w, viewportHeight: h }) => {
             
-            return mat2.fromScaling([], [w/h, 1]);
+            return [w/h,0,0,1];
           },
           c: ({ time: t }) => {
-            const a = [-0.765, 0.153];
-            const b = [Math.sin(t), Math.cos(t)];
-            return vec2.scaleAndAdd([], a, b, 2e-2);
+            return [-0.765 + Math.sin(t) * 2e-2, 0.153 + Math.cos(t) * 2e-2 ];
+            
           }
         },
         attributes: {
